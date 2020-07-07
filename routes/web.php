@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('Admin')->group(function () {
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.' ], function () {
+        
+        Route::resource('companies', 'CompanyController');
+    });
 });
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes([
     'register' => false,
 ]);
-
-Route::get('/home', 'HomeController@index')->name('home');
