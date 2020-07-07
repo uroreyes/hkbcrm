@@ -24,7 +24,13 @@
                         <td>{{ $row->name }}</td>
                         <td>{{ $row->email }}</td>
                         <td>
-                           
+                           <form action="{{ route('admin.companies.destroy', $row->id)}}" method="post" onsubmit="return confirm('Do you really want to delete this record?');">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-danger float-right" type="submit">{{ __('admin.actions.delete') }}</button>
+                           </form>
+                           <a href='{{  url("/admin/companies/$row->id/edit") }}'  class="btn btn-info float-right" style="margin-right:5px">{{ __('admin.actions.edit') }}</a>
+                           <a href='{{  url("/admin/companies/$row->id/") }}'  class="btn btn-info float-right" style="margin-right:5px">{{ __('admin.actions.view') }}</a>
                         </td>
                      </tr>
                      @endforeach
