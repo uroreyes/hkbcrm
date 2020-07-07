@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Company;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
+
 
 class CompanyController extends Controller
 {
@@ -14,7 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::all();
+        return view('admin.company.index',compact('companies'));
     }
 
     /**
@@ -24,7 +29,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.company.create');
     }
 
     /**
@@ -33,9 +38,21 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $logoURL = $this->storeImage($request);
+
+        $company = new Company([
+            'name' => $request->get('name'),
+            'logo' => $logoURL,
+            'email' => $request->get('email'),
+            
+        ]);
+        
+        $company->save();
+        return redirect('/admin/companies')->with('success', 'Company saved!');
     }
 
     /**
@@ -46,7 +63,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Company::find($id);
+        return view('admin.company.view', compact('company'));  
     }
 
     /**
@@ -57,7 +75,9 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $company = Company::find($id);
+        return view('admin.company.edit', compact('company'));  
     }
 
     /**
@@ -67,9 +87,19 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCompanyRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $rec = Company::find($id);
+        $rec->name = $request->get('name');
+        $rec->email = $request->get('email');
+        if($request->file('logo')) {
+            $rec->logo = $this->storeImage($request);
+        }
+        $rec->save();
+        return redirect('/admin/companies')->with('success', 'Company Updated!');
+
     }
 
     /**
@@ -80,6 +110,13 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rec = Company::find($id);
+        $rec->delete();        
+        return redirect('/admin/companies')->with('success', 'Company deleted!');
     }
+
+    protected function storeImage(Request $request) {
+        $path = $request->file('logo')->store('public/logos');
+        return substr($path, strlen('public/'));
+      }
 }
