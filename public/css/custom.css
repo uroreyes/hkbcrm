@@ -1,3 +1,7 @@
 #companies.card-body {
     padding: 0;
 }
+
+.card-header {
+    font-size: 1.35rem;
+}
