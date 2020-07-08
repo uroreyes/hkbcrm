@@ -36,6 +36,7 @@
                      @endforeach
                   </tbody>
                </table>
+               <div class="row justify-content-center">{{ $companies->links() }}</div>
             </div>
          </div>
       </div>
