@@ -5,7 +5,7 @@
 <div class="container">
    <div class="row">
       <div class="col-sm-8 offset-sm-2">
-         <h3 class="display-3">Add Company</h3>
+         <h3 class="display-3">{{__('admin.actions.add')}} {{  Str::singular(__('admin.modules.company'))}}</h3>
          <div>
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,12 +21,12 @@
                @csrf
                <div class="form-group">    
                   <label for="first_name">Name:</label>
-                  <input type="text" class="form-control" name="name"/>
+                  <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
                </div>
                
                <div class="form-group">
                   <label for="email">Email:</label>
-                  <input type="text" class="form-control" name="email"/>
+                  <input type="text" class="form-control" name="email" value="{{ old('email') }}"/>
                </div>
                <div class="form-group">
                   <label for="photo">Attach a Logo</label>
