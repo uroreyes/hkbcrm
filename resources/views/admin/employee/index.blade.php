@@ -4,6 +4,13 @@
 @section('content')
 <div class="container">
    <div class="row ">
+      @if(session()->get('success'))
+      <div class="col-sm-12">
+         <div class="alert alert-success">
+            {{ session()->get('success') }}  
+         </div>
+      </div>
+      @endif
       <div class="col-md-12">
          <div class="card">
             <div class="card-header">{{ __('admin.modules.employees') }}
