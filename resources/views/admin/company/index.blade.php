@@ -7,7 +7,7 @@
       <div class="col-md-12">
          <div class="card">
             <div class="card-header">{{ __('admin.modules.companies') }}
-               <a href='{{  url("/admin/companies/create") }}' class="btn btn-primary float-right">New Company</a>
+               <a href='{{  url("/admin/companies/create") }}' class="btn btn-primary float-right">{{__('admin.actions.new')}} {{  Str::singular(__('admin.modules.companies'))}}</a>
             </div>
             <div id="companies" class="card-body">
                <table class="table table-striped">
