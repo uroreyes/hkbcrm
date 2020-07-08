@@ -3,6 +3,7 @@
 return[
     'modules' => [
         'companies' => 'Companies',
+        'employees' => 'Employees',
         
     ],
     'actions' => [
@@ -12,5 +13,6 @@ return[
         'cancel'    => 'Cancel',
         'view'      => 'View',
         'save'      => 'Save',
+        'new'      => 'New',
     ]
 ];
