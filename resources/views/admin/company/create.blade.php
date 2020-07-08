@@ -5,7 +5,7 @@
 <div class="container">
    <div class="row">
       <div class="col-sm-8 offset-sm-2">
-         <h3 class="display-3">{{__('admin.actions.add')}} {{  Str::singular(__('admin.modules.company'))}}</h3>
+         <h3 class="display-3">{{__('admin.actions.add')}} {{  Str::singular(__('admin.modules.companies'))}}</h3>
          <div>
             @if ($errors->any())
             <div class="alert alert-danger">
