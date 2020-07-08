@@ -17,6 +17,7 @@ Route::namespace('Admin')->group(function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.' ], function () {
         
         Route::resource('companies', 'CompanyController');
+        Route::resource('employees', 'EmployeeController');
     });
 });
 
